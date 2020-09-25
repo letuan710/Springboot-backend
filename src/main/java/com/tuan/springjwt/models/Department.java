@@ -18,11 +18,13 @@ public class Department {
 	
 //   @ManyToOne(targetEntity=Employee.class, fetch=FetchType.LAZY,
 //			 cascade=CascadeType.ALL)	 
+	
 	/*
 	 * @ManyToOne
 	 * 
 	 * @JoinColumn(name = "department_id") private Employee employee;
 	 */
+	 
    public Department() {
 	   
    }  

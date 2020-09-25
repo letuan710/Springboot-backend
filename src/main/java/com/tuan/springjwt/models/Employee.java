@@ -1,5 +1,7 @@
 package com.tuan.springjwt.models;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -28,28 +30,36 @@ public class Employee {
 	private String name;
 	private String email;
 	private String title;
-	private Date DOB;
-	
-	
+	private Timestamp DOB;
+
 //	@OneToMany(targetEntity=Employee.class, fetch=FetchType.LAZY,
 //			 cascade=CascadeType.ALL)\
+
 	/*
 	 * @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
 	 * 
 	 * @JsonIgnore
+	 * 
+	 * private Set<Department> department;
+	 * 
+	 * @Column(name = "department", nullable = false) public Set<Department>
+	 * getDepartment1() { return department; }
+	 * 
+	 * public void setDepartment( Set<Department> department) { this.department =
+	 * (Set<Department>) department; }
+	 * 
 	 */
-	private Set<EDepartment> department;
-	 	
+
 	public Employee() {
 	}
-	
-	public Employee(String name, String title, String email, Date DOB) {
+
+	public Employee(String name, String title, String email, Timestamp DOB) {
 		this.title = title;
 		this.name = name;
 		this.email = email;
 		this.DOB = DOB;
 //		this.department = department;
-		
+
 	}
 
 	@Id
@@ -57,7 +67,7 @@ public class Employee {
 	public long getId() {
 		return id;
 	}
-	
+
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -79,7 +89,7 @@ public class Employee {
 	public void setName(String name) {
 		this.name = name;
 	}
- 
+
 	@Email
 	@Column(name = "email", nullable = false)
 	public String getemail() {
@@ -89,37 +99,23 @@ public class Employee {
 	public void setemail(String email) {
 		this.email = email;
 	}
-	
-	@Column(name ="DOB", nullable = false )
-	public Date getDob() {
+    
+	@Column(name = "DOB" )
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	public Timestamp getDob() {
 		return DOB;
 	}
-	
-	public void setDob(Date DOB) {
+
+	public void setDob(Timestamp DOB) {
 		this.DOB = DOB;
 	}
 
-	
-	
-	 public Set<EDepartment> getDepartment() { return department; }
-	  
-	 public void setDepartment(Set<EDepartment> department) { this.department =
-	 department; }
-	 
 }
 
-	
-	  
-	 
-	
-	
-		/*
-		 * @Column(name = "department", nullable = false) public Department
-		 * getDepartment() { return department; }
-		 * 
-		 * public void setDepartment(Department department) { this.department =
-		 * department; }
-		 */
+
+ 
+ 
+ 
 //	@Override
 //	public String toString() {
 //		return "Employee [id=" + id + ", title=" + title + ", name=" + name + ", email=" + email + ", DOB ="

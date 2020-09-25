@@ -37,9 +37,9 @@ public class employeeController {
 	EmployeeRepository employeeRepository;
 
 	@GetMapping("/employee")
-	public ResponseEntity<List<Employee>> getAllEmployee(@RequestParam(required = false) String title,
+	public ResponseEntity<Map<String, Object>> getAllEmployee(@RequestParam(required = false) String title,
 			@RequestParam(defaultValue = "0") int page,
-	        @RequestParam(defaultValue = "3") int size) {
+	        @RequestParam(defaultValue = "7") int size) {
 		try {
 			List<Employee> Employee = new ArrayList<Employee>();
 
@@ -60,7 +60,7 @@ public class employeeController {
 			response.put("currentPage", pageTuts.getNumber());
 			response.put("totalItems", pageTuts.getTotalElements());
 		    response.put("totalPages", pageTuts.getTotalPages());
-			return new ResponseEntity<>(Employee, HttpStatus.OK);
+			return new ResponseEntity<>(response, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
